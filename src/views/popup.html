@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+    <head>
+        <meta charset="UTF-8">
+        <title>할 일 추가</title>
+    </head>
+    
+    <body>
+        <h2>할 일 추가</h2>
+        <form id="todo-form">
+            <input type="text" id="todo-input" placeholder="할 일을 입력하세요" required />
+        
+            <input type="date" id="due-date" />
+        
+            <select id="priority">
+                <option value="low">낮음</option>
+                <option value="medium" selected>기본</option>
+                <option value="high">높음</option>
+            </select>     
+            <button type="submit">추가하기</button>
+        </form>
+    
+    <script src="../scripts/popup.js"></script>
+</body>
+</html>
