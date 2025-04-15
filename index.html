@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="UTF-8">
-    <head>
-        <meta charset="UTF-8">
-        <title>Enhanced-ToDo-List</title>
-        <script src="src/action/index.js" defer></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Enhanced-ToDo-List</title>
+    <script type="module" src="src/action/index.js" defer></script>
+</head>
+<body>
+    <h1>나만의 할 일 목록</h1>
 
-    <body>
-        <h1>나만의 할 일 목록</h1>
-        <button onclick="openTodoPopup()">작성하기</button>
-        <ol id="todoList"></ol>
-    </body>
+    <button id="openBtn">작성하기</button>
+    <button id="sortBtn">우선순위 정렬</button>
+
+    <ol id="todoList"></ol>
+</body>
 </html>

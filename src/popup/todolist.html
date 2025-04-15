@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="UTF-8">
-    <head>
-        <meta charset="UTF-8">
-        <title>일정 추가/수정</title>
-        
-    </head>
-    
-    <body>
-        <h2 id="formTitle">할 일 추가</h2>
-        <form id="todoForm">
-            <input type="hidden" id="editIndex"/>
-            <label>내용: <input type="text" id="content" placeholder="할 일을 입력하세요" required /></label><br>
-            <label>마감일: <input type="date" id="dueDate" /></label><br>
-            <label>우선순위:
-                <select id="priority">
-                    <option value="높음">높음</option>
-                    <option value="기본" selected>기본</option>
-                    <option value="낮음">낮음</option>
-                </select>    
-            </label><br>
-            <button type="submit">저장하기</button>
-        </form>
-    
-        <script src="../action/todo.js"></script>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>일정 추가/수정</title>
+    <script type="module" src="../action/todo.js"></script>
+</head>
+<body>
+    <h2 id="formTitle">할 일 추가</h2>
+    <form id="todoForm">
+        <input type="hidden" id="editIndex" />
+        <label>내용: <input type="text" id="content" placeholder="할 일을 입력하세요" required /></label><br>
+        <label>마감일: <input type="date" id="dueDate" /></label><br>
+        <label>우선순위:
+            <select id="priority">
+                <option value="높음">높음</option>
+                <option value="기본" selected>기본</option>
+                <option value="낮음">낮음</option>
+            </select>    
+        </label><br>
+        <button type="submit">저장하기</button>
+    </form>
+</body>
 </html>
