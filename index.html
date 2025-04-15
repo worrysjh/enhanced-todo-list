@@ -2,17 +2,13 @@
 <html lang="UTF-8">
     <head>
         <meta charset="UTF-8">
-        <title>Enhanced-ToDo-List</title>    
+        <title>Enhanced-ToDo-List</title>
+        <script src="src/action/index.js" defer></script>
     </head>
 
     <body>
         <h1>나만의 할 일 목록</h1>
-        <!--팝업 호출-->
-        <button onclick="openPopup()">작성하기</button>
-
-        <!--임시 출력, localstorage 데이터확인-->
-        <ol id="todo-list"></ol>
-
-        <script src="src/scripts/main.js"></script>
+        <button onclick="openTodoPopup()">작성하기</button>
+        <ol id="todoList"></ol>
     </body>
 </html>
