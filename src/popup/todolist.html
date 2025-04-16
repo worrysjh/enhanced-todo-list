@@ -11,6 +11,13 @@
         <input type="hidden" id="editIndex" />
         <label>내용: <input type="text" id="content" placeholder="할 일을 입력하세요" required /></label><br>
         <label>마감일: <input type="date" id="dueDate" /></label><br>
+        <label>시간: <input type="number" id="hour" min="1" max="12" style="width: 50px;" /> 시
+                <input type="number" id="minute" min="0" max="59" style="width: 50px;" /> 분
+            <select id="ampm">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+            </select>
+        </label><br>
         <label>우선순위:
             <select id="priority">
                 <option value="높음">높음</option>

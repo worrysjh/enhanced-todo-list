@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html lang="UTF-8">
+
 <head>
     <meta charset="UTF-8">
     <title>Enhanced-ToDo-List</title>
     <script type="module" src="src/action/index.js" defer></script>
 </head>
+
 <body>
-    <h1>나만의 할 일 목록</h1>
+    <div>
+        <div id="title">
+            <h1>나만의 할 일 목록</h1>
+        </div>
 
-    <button id="openBtn">작성하기</button>
-    <button id="sortBtn">우선순위 정렬</button>
+        <div id="action-bar">
+            <button id="openBtn">작성하기</button>
+            <button id="dateSortBtn">날짜순 정렬</button>
+            <button id="sortBtn">우선순위 정렬</button>
+        </div>
 
-    <ol id="todoList"></ol>
+        <div id="todo-list">
+            <ol id="todoList"></ol>
+        </div>
+
+        <div id="list-filter">
+            <select id="filterSelect">
+                <option value="전체">전체</option>
+                <option value="진행중">진행중</option>
+                <option value="완료">완료</option>
+            </select>
+        </div>
+    </div>
 </body>
+
 </html>
