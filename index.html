@@ -1,14 +1,49 @@
 <!DOCTYPE html>
-<html lang="UTF-8">
-    <head>
-        <meta charset="UTF-8">
-        <title>Enhanced-ToDo-List</title>
-        <script src="src/action/index.js" defer></script>
-    </head>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>나만의 할 일 목록</title>
+  <link rel="stylesheet" href="src/styles/style.css" />
+  <link rel="stylesheet" href="src/styles/mediaquery.css" />
+  <script type="module" src="src/action/index.js" defer></script>
+</head>
+<body>
 
-    <body>
-        <h1>나만의 할 일 목록</h1>
-        <button onclick="openTodoPopup()">작성하기</button>
-        <ol id="todoList"></ol>
-    </body>
+  <!-- 헤더 영역 -->
+  <header class="header-bar">
+    <h1>나만의 할 일 목록</h1>
+    <div class="header-user">👤 내정보</div>
+    <button class="hamburger" onclick="import('./src/action/ui.js').then(m => m.toggleMobileToolbar())">☰</button>
+  </header>
+
+  <!-- 모바일 전용 내비게이션 -->
+  <nav id="mobile-toolbar" aria-label="모바일 메뉴"></nav>
+
+  <div class="wrapper">
+    <!-- 사이드 메뉴 (좌측 툴바) -->
+    <aside>
+      <button id="openBtn">작성하기</button>
+      <button id="sortBtn">우선순위 정렬</button>
+      <button id="dateSortBtn">날짜순 정렬</button>
+
+      <label for="filterSelect">모아보기</label>
+      <select id="filterSelect">
+        <option value="전체">전체</option>
+        <option value="진행중">진행중</option>
+        <option value="완료">완료</option>
+      </select>
+
+      <button class="danger-button" onclick="import('./src/action/ui.js').then(m => m.deleteSelectedTodos())">
+        선택 항목 삭제
+      </button>
+    </aside>
+
+    <!-- 본문 콘텐츠 -->
+    <main>
+      <button id="openBtn" style="display: none;">작성하기</button>
+      <ol id="todoList"></ol>
+    </main>
+  </div>
+
+</body>
 </html>
