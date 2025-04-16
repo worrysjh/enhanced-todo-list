@@ -173,7 +173,7 @@ export function renderTodos() {
         : "미정";
     details.innerText = `마감일: ${
       todo.dueDate || "없음"
-    } | 날짜/시간: ${timeStr} | 중요도: ${todo.priority}`;
+    } | 마감시간: ${timeStr} | 중요도: ${todo.priority}`;
 
     if (todo.status === "완료") {
       title.style.textDecoration = "line-through";
