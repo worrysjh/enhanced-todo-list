@@ -1,0 +1,74 @@
+/* 모바일 툴바 숨김 기본 상태 및 애니메이션 설정 */
+#mobile-toolbar {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  
+  /* 툴바가 열렸을 때 상태 */
+  #mobile-toolbar.visible {
+    max-height: 500px; /* 충분한 공간 확보 */
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* 모바일 툴바 내부 버튼 및 요소 스타일 */
+  .mobile-toolbar-item {
+    padding: 10px;
+    font-size: 14px;
+    width: calc(100% - 24px); /* 전체에서 좌우 마진 뺀 너비 */
+    margin-left: 12px;
+    margin-right: 12px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  
+  /* 모바일 전용 박스 디자인 */
+  .mobile-toolbar-box {
+    background-color: #eef6f9;
+    border: 1px dashed #bbb;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 8px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.05);
+  }
+  
+  /* 햄버거 버튼 기본 숨김 */
+  .hamburger {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  /* 미디어 쿼리 - 화면이 작아졌을 때 적용 */
+  @media screen and (max-width: 768px) {
+    .hamburger {
+      display: block;
+    }
+  
+    section,
+    .header-user {
+      display: none;
+    }
+  
+    #openBtn {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+    }
+  }
+  
