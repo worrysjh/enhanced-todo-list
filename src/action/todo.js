@@ -1,10 +1,12 @@
 import { getTodos, saveTodos } from "./storage.js";
 
+// 페이지 로드시 실행될 로직
 window.onload = function () {
   const params = new URLSearchParams(location.search);
   const editIndex = params.get("edit");
   const form = document.getElementById("todoForm");
 
+  // 할 일 수정시 기존 데이터를 필드에 채워 넣기
   if (editIndex !== null) {
     const todos = getTodos();
     const index = parseInt(editIndex, 10);
@@ -22,8 +24,10 @@ window.onload = function () {
     }
   }
 
+  // 폼 제출시 실행될 로직
   form.onsubmit = function (e) {
     e.preventDefault();
+    // 유효성 검사
     const hourVal = parseInt(document.getElementById("hour").value, 10);
     const minuteVal = parseInt(document.getElementById("minute").value, 10);
     if (hourVal < 1 || hourVal > 12 || minuteVal < 0 || minuteVal > 59) {
@@ -31,6 +35,7 @@ window.onload = function () {
       return;
     }
 
+    // 입력값을 기준으로 todo 객체 생성
     const todos = getTodos();
     const todo = {
       content: document.getElementById("content").value,
@@ -42,14 +47,19 @@ window.onload = function () {
       status: "진행중",
     };
 
+    // 추가인지 수정인지 검사
+    // editIndex는 수정하려는 할 일의 항목 번호(hidden)
     const index = document.getElementById("editIndex").value;
     if (index === "") {
+      // 새로 추가
       todos.push(todo);
     } else {
+      // 기존 항목 덮어쓰기
       todo.status = todos[parseInt(index, 10)].status || "진행중";
       todos[parseInt(index, 10)] = todo;
     }
 
+    // 변경된 목록을 localStorage에 저장
     saveTodos(todos);
 
     try {
