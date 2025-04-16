@@ -67,4 +67,45 @@ index.html              # 메인 화면
 
 -- WorkFlow
 
+---
+
+## 📦 모듈 설명 (`src/action/`)
+
+이 프로젝트는 주요 기능을 목적에 따라 다음과 같은 JavaScript 모듈로 분리하여 구성되어 있습니다.
+
+### `index.js`
+> 📌 기능 초기화 및 진입점
+
+- 페이지 로드시 할 일 목록 렌더링 (`renderTodos`)
+- 버튼 이벤트 연결: 작성하기, 정렬, 필터링
+- 수정/삭제 함수를 전역으로 연결 (`window.editTodo`, `window.deleteTodo`)
+- 전체 애플리케이션의 **진입점이자 중앙 허브 역할**
+
+
+### `ui.js`
+> 🎨 UI 렌더링 및 시각적 처리 담당
+
+- `renderTodos()`: localStorage 데이터를 DOM에 표시
+- `togglePrioritySort()`, `toggleDateSort()`: 정렬 기준 전환
+- `toggleMobileToolbar()`: 모바일 툴바 동적 생성 및 표시
+- `setFilter(status)`: 전체 / 진행중 / 완료 필터 적용
+
+
+### `events.js`
+> 🧩 주요 사용자 인터랙션 처리
+
+- `openTodoPopup()`: 일정 추가용 팝업 열기
+- `editTodo(index)`: 일정 수정용 팝업 열기
+- `deleteTodo(index)`: 개별 항목 삭제
+- `deleteSelectedTodos()`: 체크된 항목 일괄 삭제
+
+
+### `storage.js`
+> 💾 데이터 저장소 관리
+
+- `getTodos()`: localStorage에서 todo 배열 불러오기
+- `saveTodos(todos)`: localStorage에 todo 배열 저장
+
+---
+
 
