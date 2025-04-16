@@ -8,19 +8,20 @@
   <script type="module" src="src/action/index.js" defer></script>
 </head>
 <body>
-  <!-- 헤더 -->
-  <div class="header-bar">
+
+  <!-- 헤더 영역 -->
+  <header class="header-bar">
     <h1>나만의 할 일 목록</h1>
     <div class="header-user">👤 내정보</div>
     <button class="hamburger" onclick="import('./src/action/ui.js').then(m => m.toggleMobileToolbar())">☰</button>
-  </div>
+  </header>
 
-  <!-- 모바일 툴바 (초기에는 숨김) -->
-  <div id="mobile-toolbar"></div>
+  <!-- 모바일 전용 내비게이션 -->
+  <nav id="mobile-toolbar" aria-label="모바일 메뉴"></nav>
 
   <div class="wrapper">
-    <!-- 왼쪽 툴바 -->
-    <section>
+    <!-- 사이드 메뉴 (좌측 툴바) -->
+    <aside>
       <button id="openBtn">작성하기</button>
       <button id="sortBtn">우선순위 정렬</button>
       <button id="dateSortBtn">날짜순 정렬</button>
@@ -35,13 +36,14 @@
       <button class="danger-button" onclick="import('./src/action/ui.js').then(m => m.deleteSelectedTodos())">
         선택 항목 삭제
       </button>
-    </section>
+    </aside>
 
-    <!-- 메인 콘텐츠 -->
+    <!-- 본문 콘텐츠 -->
     <main>
       <button id="openBtn" style="display: none;">작성하기</button>
       <ol id="todoList"></ol>
     </main>
   </div>
+
 </body>
 </html>
