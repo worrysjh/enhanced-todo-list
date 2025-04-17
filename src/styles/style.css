@@ -1,6 +1,41 @@
 body {
-    margin: 0;
-  }
+  background-color: #ffffff;
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+/* 다크모드 테마 */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+/* 요소별 테마 적용 */
+body.dark-mode .todo-item {
+  background-color: #333;
+  color: #000000;
+}
+
+body.dark-mode .header-bar {
+  background-color: #2e2e2e;
+  color: white;
+}
+
+body.dark-mode .mobile-toolbar-item,
+body.dark-mode .mobile-toolbar-box {
+  background-color: #444;
+  color: white;
+}
+
+body.dark-mode button {
+  background-color: #555;
+  color: white;
+}
+
+body.dark-mode select {
+  background-color: #555;
+  color: white;
+}
   
   /* 레이아웃 구조 */
   .wrapper {

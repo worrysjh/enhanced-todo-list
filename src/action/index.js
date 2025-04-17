@@ -25,6 +25,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // 팝업에서 접근하기위해 수정,삭제 함수의 전역 등록
   window.editTodo = editTodo;
   window.deleteTodo = deleteTodo;
+  
+  // 웹 테마 토글 로직
+  const themeToggleBtn = document.getElementById("themeToggleBtn");
+  if (themeToggleBtn) {
+    themeToggleBtn.onclick = () => {
+      const isDark = document.body.classList.toggle("dark-mode");
+      themeToggleBtn.textContent = isDark
+        ? "☀️ 라이트모드로 전환"
+        : "🌙 다크모드로 전환";
+    };
+  }
 });
 
 // 다른 탭에서 localStorage가 변동될 경우 자동으로 목록 렌더링

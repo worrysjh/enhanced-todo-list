@@ -8,19 +8,21 @@
   <script type="module" src="src/action/index.js" defer></script>
 </head>
 <body>
-
-  <!-- 헤더 영역 -->
+  <!-- 헤더 -->
   <header class="header-bar">
     <h1>나만의 할 일 목록</h1>
-    <div class="header-user">👤 내정보</div>
-    <button class="hamburger" onclick="import('./src/action/ui.js').then(m => m.toggleMobileToolbar())">☰</button>
+    <div>
+      <button id="themeToggleBtn" class="theme-toggle">🌙 다크모드로 전환</button>
+      <button class="hamburger" onclick="import('./src/action/ui.js').then(m => m.toggleMobileToolbar())">☰</button>
+    </div>
   </header>
 
-  <!-- 모바일 전용 내비게이션 -->
-  <nav id="mobile-toolbar" aria-label="모바일 메뉴"></nav>
+  <!-- 모바일 툴바 -->
+  <nav id="mobile-toolbar"></nav>
 
+  <!-- 메인 레이아웃 -->
   <div class="wrapper">
-    <!-- 사이드 메뉴 (좌측 툴바) -->
+    <!-- 왼쪽 메뉴 -->
     <aside>
       <button id="openBtn">작성하기</button>
       <button id="sortBtn">우선순위 정렬</button>
@@ -38,12 +40,26 @@
       </button>
     </aside>
 
-    <!-- 본문 콘텐츠 -->
+    <!-- 본문 -->
     <main>
       <button id="openBtn" style="display: none;">작성하기</button>
-      <ul id="todoList"></ol>
+      <ul id="todoList"></ul>
     </main>
   </div>
 
+  <!-- 템플릿 -->
+  <template id="todo-template">
+    <li class="todo-item narrow">
+      <div class="todo-top">
+        <input type="checkbox" class="todo-check" />
+        <div class="todo-buttons">
+          <button class="edit-btn">✏️</button>
+          <button class="delete-btn">🗑️</button>
+        </div>
+      </div>
+      <div class="todo-title"></div>
+      <div class="todo-details"></div>
+    </li>
+  </template>
 </body>
 </html>
