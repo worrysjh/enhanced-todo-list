@@ -10,7 +10,9 @@
     <h2 id="formTitle">할 일 추가</h2>
     <form id="todoForm">
         <input type="hidden" id="editIndex" />
-        <label>내용: <input type="text" id="content" placeholder="할 일을 입력하세요" required /></label><br>
+
+        <label for="content">내용: </label>
+        <textarea id="content" placeholder="할 일을 입력하세요" required rows="4"></textarea><br>
         <label>마감일: <input type="date" id="dueDate" /></label><br>
         <label>시간: <input type="number" id="hour" min="1" max="12" style="width: 50px;" /> 시
                 <input type="number" id="minute" min="0" max="59" style="width: 50px;" /> 분
