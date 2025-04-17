@@ -48,9 +48,36 @@ body {
   
   /* 기본 목록 스타일 */
   #todoList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 기본 2개씩 */
+    gap: 12px;
     list-style: none;
     padding: 0 20px;
     margin: 0;
+  }
+  
+  /* 리스트 항목 스타일은 그대로 유지 */
+  .todo-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  /* 너무 길지 않게 제한 */
+  .todo-item.narrow {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin-left: 0;
+  }
+  
+  /* 반응형 처리 - 좁은 화면에서 한 줄에 하나만 */
+  @media screen and (max-width: 1000px) {
+    #todoList {
+      grid-template-columns: 1fr;
+    }
   }
   
   /* 헤더 타이틀 컨테이너 */
@@ -96,8 +123,8 @@ body {
   
   .todo-item.narrow {
     width: 90%;
-    max-width: 500px;
-    min-width: 200px;
+    max-width: 700px;
+    min-width: 350px;
     margin-left: 0;
   }
   

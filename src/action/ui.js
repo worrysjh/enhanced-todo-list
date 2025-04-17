@@ -45,7 +45,7 @@ export function deleteSelectedTodos() {
 // 창이 다시 커졌을 때 mobile-toolbar 숨김 처리
 window.addEventListener("resize", () => {
   const toolbar = document.getElementById("mobile-toolbar");
-  if (window.innerWidth > 768 && toolbar.classList.contains("visible")) {
+  if (window.innerWidth > 610 && toolbar.classList.contains("visible")) {
     toolbar.classList.remove("visible");
   }
 });
@@ -90,6 +90,8 @@ export function toggleMobileToolbar() {
   }
   toolbar.classList.toggle("visible");
 }
+
+
 
 // 할 일 목록을 화면에 렌더링
 export function renderTodos() {

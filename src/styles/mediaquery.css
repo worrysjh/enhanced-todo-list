@@ -1,3 +1,16 @@
+/* 툴바가 열렸을 때 상태 */
+#mobile-toolbar.visible {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px;
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  background-color: #2e7d32;
+}
+
 /* 모바일 툴바 숨김 기본 상태 및 애니메이션 설정 */
 #mobile-toolbar {
   max-height: 0;
@@ -8,22 +21,9 @@
   pointer-events: none;
 }
 
-/* 툴바가 열렸을 때 상태 - 2열 Grid 적용 */
-#mobile-toolbar.visible {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  padding: 10px;
-  max-height: 500px;
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-  background-color: #2e7d32;
-}
-
 /* 모바일 툴바 내부 버튼 및 요소 스타일 */
 .mobile-toolbar-item {
-  padding: 10px;
+  padding: 100%;
   font-size: 14px;
   width: 100%;
   background-color: white;
@@ -54,7 +54,7 @@
 }
 
 /* 미디어 쿼리 - 화면이 작아졌을 때 적용 */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 610px) {
   .hamburger {
     display: block;
   }
@@ -68,11 +68,5 @@
     display: block;
     width: 100%;
     margin: 10px 0;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  #mobile-toolbar.visible {
-    grid-template-columns: 1fr; /* 화면이 매우 작아지면 1열로 전환 */
   }
 }
