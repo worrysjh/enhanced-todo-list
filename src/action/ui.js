@@ -1,5 +1,6 @@
+
 import { getTodos, saveTodos } from "./storage.js";
-import { editTodo, deleteTodo } from "./events.js";
+import { deleteTodo } from "./events.js";
 
 let sortDescending = true;
 let sortByDate = false;
@@ -28,7 +29,6 @@ export function setFilter(status) {
 export function deleteSelectedTodos() {
   const checkboxes = document.querySelectorAll(".todo-check:checked");
   const selectedIndexes = Array.from(checkboxes).map(cb => parseInt(cb.dataset.index));
-
   if (selectedIndexes.length === 0) return;
 
   let todos = getTodos();
@@ -37,23 +37,13 @@ export function deleteSelectedTodos() {
   renderTodos();
 }
 
-// 창이 커지면 모바일 툴바 닫기
-window.addEventListener("resize", () => {
-  const toolbar = document.getElementById("mobile-toolbar");
-  if (window.innerWidth > 768 && toolbar.classList.contains("visible")) {
-    toolbar.classList.remove("visible");
-  }
-});
-
 export function toggleMobileToolbar() {
   const toolbar = document.getElementById("mobile-toolbar");
-
   if (!mobileToolbarInitialized) {
     const createBtn = document.createElement("button");
     createBtn.textContent = "작성하기";
     createBtn.className = "mobile-toolbar-item mobile-toolbar-box";
-    createBtn.onclick = () =>
-      window.open("src/popup/todolist.html", "일정 추가", "width=400,height=550");
+    createBtn.onclick = () => document.getElementById("todoDialog").showModal();
 
     const priBtn = document.createElement("button");
     priBtn.textContent = "우선순위 정렬";
@@ -70,7 +60,8 @@ export function toggleMobileToolbar() {
     filter.innerHTML = `
       <option value="전체">전체</option>
       <option value="진행중">진행중</option>
-      <option value="완료">완료</option>`;
+      <option value="완료">완료</option>
+    `;
     filter.onchange = (e) => setFilter(e.target.value);
 
     const del = document.createElement("button");
@@ -85,30 +76,32 @@ export function toggleMobileToolbar() {
   toolbar.classList.toggle("visible");
 }
 
+window.addEventListener("resize", () => {
+  const toolbar = document.getElementById("mobile-toolbar");
+  if (window.innerWidth > 768 && toolbar.classList.contains("visible")) {
+    toolbar.classList.remove("visible");
+  }
+});
+
 export function renderTodos() {
   const list = document.getElementById("todoList");
   if (!list) return;
   list.innerHTML = "";
 
   let todos = getTodos();
-
   if (filterStatus !== "전체") {
-    todos = todos.filter((todo) => todo.status === filterStatus);
+    todos = todos.filter(todo => todo.status === filterStatus);
   }
 
   todos = todos
     .map((todo, originalIndex) => ({ ...todo, originalIndex }))
     .sort((a, b) => {
       if (sortByDate) {
-        const aHasDate = !!a.dueDate;
-        const bHasDate = !!b.dueDate;
-
-        if (!aHasDate && !bHasDate) return 0;
-        if (!aHasDate) return sortDescending ? 1 : -1;
-        if (!bHasDate) return sortDescending ? -1 : 1;
-
-        const aDate = new Date(`${a.dueDate} ${a.hour || 0}:${a.minute || 0} ${a.ampm || "AM"}`);
-        const bDate = new Date(`${b.dueDate} ${b.hour || 0}:${b.minute || 0} ${b.ampm || "AM"}`);
+        const aDate = a.dueDate ? new Date(`${a.dueDate} ${a.hour || 0}:${a.minute || 0} ${a.ampm || "AM"}`) : null;
+        const bDate = b.dueDate ? new Date(`${b.dueDate} ${b.hour || 0}:${b.minute || 0} ${b.ampm || "AM"}`) : null;
+        if (!aDate && !bDate) return 0;
+        if (!aDate) return sortDescending ? 1 : -1;
+        if (!bDate) return sortDescending ? -1 : 1;
         return sortDescending ? bDate - aDate : aDate - bDate;
       } else {
         const priorityMap = { 높음: 3, 기본: 2, 낮음: 1 };
@@ -119,19 +112,39 @@ export function renderTodos() {
     });
 
   const template = document.getElementById("todo-template");
-
-  todos.forEach((todo) => {
+  todos.forEach(todo => {
     const clone = template.content.cloneNode(true);
-
     const checkbox = clone.querySelector(".todo-check");
     checkbox.dataset.index = todo.originalIndex;
 
-    clone.querySelector(".edit-btn").onclick = () => editTodo(todo.originalIndex);
-    clone.querySelector(".delete-btn").onclick = () => deleteTodo(todo.originalIndex);
+    const editBtn = clone.querySelector(".edit-btn");
+    editBtn.dataset.index = todo.originalIndex;
+    editBtn.onclick = () => {
+      const todos = getTodos();
+      const target = todos[todo.originalIndex];
+      if (!target) return;
+
+      document.getElementById("editIndex").value = todo.originalIndex;
+      document.getElementById("content").value = target.content;
+      document.getElementById("dueDate").value = target.dueDate || "";
+      document.getElementById("hour").value = target.hour || "";
+      document.getElementById("minute").value = 
+        typeof target.minute === "number" ? target.minute : "";
+      document.getElementById("ampm").value = target.ampm || "AM";
+      document.getElementById("priority").value = target.priority || "기본";
+
+      document.getElementById("todoDialog").showModal();
+    };
+
+    const deleteBtn = clone.querySelector(".delete-btn");
+    deleteBtn.onclick = () => deleteTodo(todo.originalIndex);
 
     const title = clone.querySelector(".todo-title");
     const statusLabel = todo.status === "완료" ? "(완료) " : "";
     title.textContent = statusLabel + todo.content;
+    title.classList.toggle("completed", todo.status === "완료");
+    title.dataset.tooltip = todo.status === "완료" ? "진행중으로 변경" : "완료하기";
+
     title.onclick = () => {
       const allTodos = getTodos();
       const target = allTodos[todo.originalIndex];
@@ -139,9 +152,6 @@ export function renderTodos() {
       saveTodos(allTodos);
       renderTodos();
     };
-    if (todo.status === "완료") {
-      title.style.textDecoration = "line-through";
-    }
 
     const details = clone.querySelector(".todo-details");
     const timeStr =
@@ -161,11 +171,18 @@ function updateSortIndicators() {
   const dateSortBtn = document.getElementById("dateSortBtn");
   const arrow = sortDescending ? " 🔽" : " 🔼";
 
+  const mobileSortBtn = document.querySelector('#mobile-toolbar button:nth-child(2)');
+  const mobileDateBtn = document.querySelector('#mobile-toolbar button:nth-child(3)');
+
   if (!sortByDate) {
-    sortBtn.textContent = "우선순위 정렬" + arrow;
-    dateSortBtn.textContent = "날짜순 정렬";
+    if (sortBtn) sortBtn.textContent = "우선순위 정렬" + arrow;
+    if (dateSortBtn) dateSortBtn.textContent = "날짜순 정렬";
+    if (mobileSortBtn) mobileSortBtn.textContent = "우선순위 정렬" + arrow;
+    if (mobileDateBtn) mobileDateBtn.textContent = "날짜순 정렬";
   } else {
-    dateSortBtn.textContent = "날짜순 정렬" + arrow;
-    sortBtn.textContent = "우선순위 정렬";
+    if (sortBtn) sortBtn.textContent = "우선순위 정렬";
+    if (dateSortBtn) dateSortBtn.textContent = "날짜순 정렬" + arrow;
+    if (mobileSortBtn) mobileSortBtn.textContent = "우선순위 정렬";
+    if (mobileDateBtn) mobileDateBtn.textContent = "날짜순 정렬" + arrow;
   }
 }

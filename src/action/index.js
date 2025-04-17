@@ -4,39 +4,105 @@ import {
   toggleDateSort,
   setFilter,
 } from "./ui.js";
-import { openTodoPopup, editTodo, deleteTodo } from "./events.js";
+import { editTodo, deleteTodo } from "./events.js";
+import { getTodos, saveTodos } from "./storage.js";
 
-// 문서가 모두 로드된 후 실행될 초기화 코드
 document.addEventListener("DOMContentLoaded", () => {
   renderTodos();
 
-  // 버튼 및 필터 요소 가져오기
   const openBtn = document.getElementById("openBtn");
   const sortBtn = document.getElementById("sortBtn");
   const dateSortBtn = document.getElementById("dateSortBtn");
   const filterSelect = document.getElementById("filterSelect");
+  const themeToggleBtn = document.getElementById("themeToggleBtn");
+  const todoList = document.getElementById("todoList");
+  const todoDialog = document.getElementById("todoDialog");
+  const cancelBtn = document.getElementById("cancelBtn");
+  const form = document.getElementById("todoForm");
 
-  // 버튼별 클릭시 각 기능 연결
-  if (openBtn) openBtn.onclick = openTodoPopup;
+  if (openBtn) {
+    openBtn.onclick = () => {
+      form.reset();
+      document.getElementById("editIndex").value = "";
+      todoDialog.showModal();
+    };
+  }
+
+  if (cancelBtn) cancelBtn.onclick = () => todoDialog.close();
+
+  if (form) {
+    form.onsubmit = (e) => {
+      e.preventDefault();
+
+      const hourVal = parseInt(document.getElementById("hour").value, 10);
+      const minuteVal = parseInt(document.getElementById("minute").value, 10);
+      if (hourVal < 1 || hourVal > 12 || minuteVal < 0 || minuteVal > 59) {
+        alert("시간은 1~12 사이, 분은 0~59 사이로 입력해주세요.");
+        return;
+      }
+
+      const todos = getTodos();
+      const todo = {
+        content: document.getElementById("content").value,
+        dueDate: document.getElementById("dueDate").value,
+        hour: hourVal,
+        minute: minuteVal,
+        ampm: document.getElementById("ampm").value,
+        priority: document.getElementById("priority").value,
+        status: "진행중",
+      };
+
+      const index = document.getElementById("editIndex").value;
+      if (index === "") {
+        todos.push(todo);
+      } else {
+        todo.status = todos[parseInt(index, 10)].status || "진행중";
+        todos[parseInt(index, 10)] = todo;
+      }
+
+      saveTodos(todos);
+      todoDialog.close();
+      renderTodos();
+    };
+  }
+
   if (sortBtn) sortBtn.onclick = togglePrioritySort;
   if (dateSortBtn) dateSortBtn.onclick = toggleDateSort;
   if (filterSelect) filterSelect.onchange = (e) => setFilter(e.target.value);
 
-  // 팝업에서 접근하기위해 수정,삭제 함수의 전역 등록
-  window.editTodo = editTodo;
-  window.deleteTodo = deleteTodo;
-  
-  // 웹 테마 토글 로직
-  const themeToggleBtn = document.getElementById("themeToggleBtn");
   if (themeToggleBtn) {
-    themeToggleBtn.onclick = () => {
-      const isDark = document.body.classList.toggle("dark-mode");
-      themeToggleBtn.textContent = isDark
-        ? "☀️ 라이트모드로 전환"
-        : "🌙 다크모드로 전환";
-    };
+    themeToggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      if (document.body.classList.contains("dark-mode")) {
+        themeToggleBtn.innerText = "☀️ 라이트모드로 전환";
+      } else {
+        themeToggleBtn.innerText = "🌙 다크모드로 전환";
+      }
+    });
   }
+
+  if (todoList && !todoList.classList.contains("grid-list")) {
+    todoList.classList.add("grid-list");
+  }
+
+  window.editTodo = (index) => {
+    const todos = getTodos();
+    const todo = todos[index];
+
+    if (!todo) return;
+
+    document.getElementById("content").value = todo.content;
+    document.getElementById("dueDate").value = todo.dueDate;
+    document.getElementById("hour").value = todo.hour;
+    document.getElementById("minute").value = todo.minute;
+    document.getElementById("ampm").value = todo.ampm;
+    document.getElementById("priority").value = todo.priority;
+    document.getElementById("editIndex").value = index;
+
+    todoDialog.showModal();
+  };
+
+  window.deleteTodo = deleteTodo;
 });
 
-// 다른 탭에서 localStorage가 변동될 경우 자동으로 목록 렌더링
 window.addEventListener("storage", renderTodos);

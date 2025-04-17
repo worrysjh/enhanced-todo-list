@@ -1,73 +1,75 @@
-body {
-    font-family: "Segoe UI", sans-serif;
-    background-color: #ffffff;
-    margin: 0;
-    padding: 20px;
-    color: #333;
-  }
-  
-  h2#formTitle {
-    font-size: 20px;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #2e7d32;
-    color: #2e7d32;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    
-  }
-  
-  label {
-    font-weight: 500;
-    margin-bottom: 6px;
-    display: block;
-  }
-  
-  #content {
-    width: 100%;
-    height: 120px;
-    padding: 10px;
-    font-size: 14px;
-    resize: none;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-  
-  .date-time-row,
-  .priority-row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  
-  input[type="date"],
-  input[type="text"],
-  input[type="number"],
-  select {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    width: auto;
-  }
-  
-  button[type="submit"] {
-    background-color: #2e7d32;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    align-self: flex-end;
-    transition: background-color 0.2s ease;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #27682c;
-  }
-  
+/* 다이얼로그 기본 모양 */
+dialog#todoDialog {
+  width: 400px;
+  max-width: 90%;
+  border: none;
+  border-radius: 8px;
+  padding: 20px 24px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+}
+
+/* 폼 구성 */
+#todoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  font-weight: 500;
+  display: block;
+}
+
+#content {
+  width: 100%;
+  height: 120px;
+  padding: 10px;
+  font-size: 14px;
+  resize: none;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type="date"],
+input[type="number"],
+select {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  width: auto;
+}
+
+menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+button[type="submit"] {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #27682c;
+}
+
+button#cancelBtn {
+  background-color: #eee;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  font-size: 15px;
+  cursor: pointer;
+}
