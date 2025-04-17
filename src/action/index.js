@@ -4,7 +4,7 @@ import {
   toggleDateSort,
   setFilter,
 } from "./ui.js";
-import { editTodo, deleteTodo } from "./events.js";
+import { deleteTodo } from "./events.js";
 import { getTodos, saveTodos } from "./storage.js";
 
 document.addEventListener("DOMContentLoaded", () => {
