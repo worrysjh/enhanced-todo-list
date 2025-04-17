@@ -62,6 +62,8 @@ window.onload = function () {
     // 변경된 목록을 localStorage에 저장
     saveTodos(todos);
 
+
+    
     try {
       if (window.opener && window.opener.location) {
         window.opener.location.reload();

@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <title>나만의 할 일 목록</title>
   <link rel="stylesheet" href="src/styles/style.css" />
+  <link rel="stylesheet" href="src/styles/popup.css" />
   <link rel="stylesheet" href="src/styles/mediaquery.css" />
   <script type="module" src="src/action/index.js" defer></script>
 </head>
 <body>
-  <!-- 헤더 -->
   <header class="header-bar">
     <h1>나만의 할 일 목록</h1>
     <div>
@@ -17,12 +17,9 @@
     </div>
   </header>
 
-  <!-- 모바일 툴바 -->
   <nav id="mobile-toolbar"></nav>
 
-  <!-- 메인 레이아웃 -->
   <div class="wrapper">
-    <!-- 왼쪽 메뉴 -->
     <aside>
       <button id="openBtn">작성하기</button>
       <button id="sortBtn">우선순위 정렬</button>
@@ -40,21 +37,47 @@
       </button>
     </aside>
 
-    <!-- 본문 -->
     <main>
       <button id="openBtn" style="display: none;">작성하기</button>
       <ul id="todoList"></ul>
     </main>
   </div>
 
-  <!-- 템플릿 -->
+  <dialog id="todoDialog">
+    <form method="dialog" id="todoForm">
+      <input type="hidden" id="editIndex" />
+      <label for="content">내용:</label><br />
+      <textarea id="content" required rows="4" placeholder="할 일을 입력하세요"></textarea><br />
+      <label>마감일: <input type="date" id="dueDate" /></label><br />
+      <label>
+        시간:
+        <input type="number" id="hour" min="1" max="12" />
+        <input type="number" id="minute" min="0" max="59" />
+        <select id="ampm">
+          <option>AM</option><option>PM</option>
+        </select>
+      </label><br />
+      <label>우선순위:
+        <select id="priority">
+          <option>높음</option>
+          <option selected>기본</option>
+          <option>낮음</option>
+        </select>
+      </label><br />
+      <menu>
+        <button type="submit">저장</button>
+        <button type="button" id="cancelBtn">취소</button>
+      </menu>
+    </form>
+  </dialog>
+
   <template id="todo-template">
     <li class="todo-item narrow">
       <div class="todo-top">
         <input type="checkbox" class="todo-check" />
         <div class="todo-buttons">
-          <button class="edit-btn">✏️</button>
-          <button class="delete-btn">🗑️</button>
+          <button class="edit-btn" type="button" data-index="">✏️</button>
+          <button class="delete-btn" type="button">🗑️</button>
         </div>
       </div>
       <div class="todo-title"></div>
