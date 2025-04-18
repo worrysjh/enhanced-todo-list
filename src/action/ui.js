@@ -1,4 +1,3 @@
-
 import { getTodos, saveTodos } from "./storage.js";
 import { deleteTodo } from "./events.js";
 
@@ -28,7 +27,9 @@ export function setFilter(status) {
 
 export function deleteSelectedTodos() {
   const checkboxes = document.querySelectorAll(".todo-check:checked");
-  const selectedIndexes = Array.from(checkboxes).map(cb => parseInt(cb.dataset.index));
+  const selectedIndexes = Array.from(checkboxes).map((cb) =>
+    parseInt(cb.dataset.index)
+  );
   if (selectedIndexes.length === 0) return;
 
   let todos = getTodos();
@@ -78,7 +79,7 @@ export function toggleMobileToolbar() {
 
 window.addEventListener("resize", () => {
   const toolbar = document.getElementById("mobile-toolbar");
-  if (window.innerWidth > 768 && toolbar.classList.contains("visible")) {
+  if (window.innerWidth > 610 && toolbar.classList.contains("visible")) {
     toolbar.classList.remove("visible");
   }
 });
@@ -90,15 +91,23 @@ export function renderTodos() {
 
   let todos = getTodos();
   if (filterStatus !== "전체") {
-    todos = todos.filter(todo => todo.status === filterStatus);
+    todos = todos.filter((todo) => todo.status === filterStatus);
   }
 
   todos = todos
     .map((todo, originalIndex) => ({ ...todo, originalIndex }))
     .sort((a, b) => {
       if (sortByDate) {
-        const aDate = a.dueDate ? new Date(`${a.dueDate} ${a.hour || 0}:${a.minute || 0} ${a.ampm || "AM"}`) : null;
-        const bDate = b.dueDate ? new Date(`${b.dueDate} ${b.hour || 0}:${b.minute || 0} ${b.ampm || "AM"}`) : null;
+        const aDate = a.dueDate
+          ? new Date(
+              `${a.dueDate} ${a.hour || 0}:${a.minute || 0} ${a.ampm || "AM"}`
+            )
+          : null;
+        const bDate = b.dueDate
+          ? new Date(
+              `${b.dueDate} ${b.hour || 0}:${b.minute || 0} ${b.ampm || "AM"}`
+            )
+          : null;
         if (!aDate && !bDate) return 0;
         if (!aDate) return sortDescending ? 1 : -1;
         if (!bDate) return sortDescending ? -1 : 1;
@@ -112,7 +121,7 @@ export function renderTodos() {
     });
 
   const template = document.getElementById("todo-template");
-  todos.forEach(todo => {
+  todos.forEach((todo) => {
     const clone = template.content.cloneNode(true);
     const checkbox = clone.querySelector(".todo-check");
     checkbox.dataset.index = todo.originalIndex;
@@ -128,7 +137,7 @@ export function renderTodos() {
       document.getElementById("content").value = target.content;
       document.getElementById("dueDate").value = target.dueDate || "";
       document.getElementById("hour").value = target.hour || "";
-      document.getElementById("minute").value = 
+      document.getElementById("minute").value =
         typeof target.minute === "number" ? target.minute : "";
       document.getElementById("ampm").value = target.ampm || "AM";
       document.getElementById("priority").value = target.priority || "기본";
@@ -143,7 +152,8 @@ export function renderTodos() {
     const statusLabel = todo.status === "완료" ? "(완료) " : "";
     title.textContent = statusLabel + todo.content;
     title.classList.toggle("completed", todo.status === "완료");
-    title.dataset.tooltip = todo.status === "완료" ? "진행중으로 변경" : "완료하기";
+    title.dataset.tooltip =
+      todo.status === "완료" ? "진행중으로 변경" : "완료하기";
 
     title.onclick = () => {
       const allTodos = getTodos();
@@ -158,7 +168,9 @@ export function renderTodos() {
       todo.hour && todo.minute !== undefined && todo.ampm
         ? `${todo.hour}:${todo.minute.toString().padStart(2, "0")} ${todo.ampm}`
         : "미정";
-    details.textContent = `마감일: ${todo.dueDate || "없음"} | 마감시간: ${timeStr} | 중요도: ${todo.priority}`;
+    details.textContent = `마감일: ${
+      todo.dueDate || "없음"
+    } | 마감시간: ${timeStr} | 중요도: ${todo.priority}`;
 
     list.appendChild(clone);
   });
@@ -171,8 +183,12 @@ function updateSortIndicators() {
   const dateSortBtn = document.getElementById("dateSortBtn");
   const arrow = sortDescending ? " 🔽" : " 🔼";
 
-  const mobileSortBtn = document.querySelector('#mobile-toolbar button:nth-child(2)');
-  const mobileDateBtn = document.querySelector('#mobile-toolbar button:nth-child(3)');
+  const mobileSortBtn = document.querySelector(
+    "#mobile-toolbar button:nth-child(2)"
+  );
+  const mobileDateBtn = document.querySelector(
+    "#mobile-toolbar button:nth-child(3)"
+  );
 
   if (!sortByDate) {
     if (sortBtn) sortBtn.textContent = "우선순위 정렬" + arrow;
