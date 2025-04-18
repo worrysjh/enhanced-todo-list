@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="UTF-8">
+
 <head>
   <meta charset="UTF-8" />
   <title>나만의 할 일 목록</title>
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="src/styles/mediaquery.css" />
   <script type="module" src="src/action/index.js" defer></script>
 </head>
+
 <body>
   <header class="header-bar">
     <h1>나만의 할 일 목록</h1>
@@ -54,7 +56,8 @@
         <input type="number" id="hour" min="1" max="12" />
         <input type="number" id="minute" min="0" max="59" />
         <select id="ampm">
-          <option>AM</option><option>PM</option>
+          <option>AM</option>
+          <option>PM</option>
         </select>
       </label><br />
       <label>우선순위:
@@ -84,5 +87,10 @@
       <div class="todo-details"></div>
     </li>
   </template>
+
+  <footer class="footer-bar">
+    1단계: 기능 강화 '나만의 할 일 목록' 앱 (HTML5, CSS3, localStorage, Vanilla JS)
+  </footer>
 </body>
+
 </html>
