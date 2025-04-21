@@ -120,7 +120,7 @@ export function renderTodos() {
       }
     });
 
-  const template = document.getElementById("todo-template");
+  const template = document.getElementById("todoTemplate");
   todos.forEach((todo) => {
     const clone = template.content.cloneNode(true);
     const checkbox = clone.querySelector(".todo-check");
