@@ -39,7 +39,7 @@ export function deleteSelectedTodos() {
 }
 
 export function toggleMobileToolbar() {
-  const toolbar = document.getElementById("mobile-toolbar");
+  const toolbar = document.getElementById("mobileToolbar");
   if (!mobileToolbarInitialized) {
     const createBtn = document.createElement("button");
     createBtn.textContent = "작성하기";
@@ -78,7 +78,7 @@ export function toggleMobileToolbar() {
 }
 
 window.addEventListener("resize", () => {
-  const toolbar = document.getElementById("mobile-toolbar");
+  const toolbar = document.getElementById("mobileToolbar");
   if (window.innerWidth > 610 && toolbar.classList.contains("visible")) {
     toolbar.classList.remove("visible");
   }
@@ -184,10 +184,10 @@ function updateSortIndicators() {
   const arrow = sortDescending ? " 🔽" : " 🔼";
 
   const mobileSortBtn = document.querySelector(
-    "#mobile-toolbar button:nth-child(2)"
+    "#mobileToolbar button:nth-child(2)"
   );
   const mobileDateBtn = document.querySelector(
-    "#mobile-toolbar button:nth-child(3)"
+    "#mobileToolbar button:nth-child(3)"
   );
 
   if (!sortByDate) {

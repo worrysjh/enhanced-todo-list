@@ -78,7 +78,7 @@ main {
 
 #todoList {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
   gap: 12px;
   list-style: none;
   padding: 0 20px;
@@ -92,14 +92,8 @@ main {
   background-color: var(--card-bg);
   color: var(--text-color);
   box-shadow: 0 2px 4px var(--box-shadow);
+  max-width: 500px;
   margin: 10px 0;
-}
-
-.todo-item.narrow {
-  width: 90%;
-  max-width: 700px;
-  min-width: 350px;
-  margin-left: 0;
 }
 
 @media screen and (max-width: 1000px) {
