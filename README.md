@@ -163,4 +163,7 @@ Visual Studio Code 기준으로 서술합니다.
 
 💡 이 프로젝트는 HTML/CSS/JS만으로 구현되어 있으며, 별도의 서버 환경 없이도 실행 가능한 **순수 클라이언트 기반 웹 애플리케이션**입니다.
 
+---
 
+### 링크
+<a target="_blank" href="https://icons8.com/icon/T79TG7JodV5I/%EC%9C%84%EC%AA%BD-%ED%99%94%EC%82%B4%ED%91%9C-%EC%9D%B4%EB%AA%A8%ED%8B%B0%EC%BD%98">위쪽 화살표 이모티콘</a> 작가: <a target="_blank" href="https://icons8.com">Icons8</a>
