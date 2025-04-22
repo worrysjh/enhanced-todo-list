@@ -181,7 +181,13 @@ export function renderTodos() {
 function updateSortIndicators() {
   const sortBtn = document.getElementById("sortBtn");
   const dateSortBtn = document.getElementById("dateSortBtn");
-  const arrow = sortDescending ? " 🔽" : " 🔼";
+
+  const arrowImg = document.createElement("img");
+  arrowImg.src = sortDescending
+    ? "src/common/icons/downArrow.png"
+    : "src/common/icons/upArrow.png";
+  arrowImg.alt = sortDescending ? "내림차순" : "오름차순";
+  arrowImg.className = "sort-icon";
 
   const mobileSortBtn = document.querySelector(
     "#mobileToolbar button:nth-child(2)"
@@ -191,14 +197,26 @@ function updateSortIndicators() {
   );
 
   if (!sortByDate) {
-    if (sortBtn) sortBtn.textContent = "우선순위 정렬" + arrow;
-    if (dateSortBtn) dateSortBtn.textContent = "날짜순 정렬";
-    if (mobileSortBtn) mobileSortBtn.textContent = "우선순위 정렬" + arrow;
-    if (mobileDateBtn) mobileDateBtn.textContent = "날짜순 정렬";
+    if (sortBtn) {
+      sortBtn.innerText = "우선순위 정렬";
+      sortBtn.appendChild(arrowImg.cloneNode());
+    }
+    if (dateSortBtn) dateSortBtn.innerText = "날짜순 정렬";
+    if (mobileSortBtn) {
+      mobileSortBtn.innerText = "우선순위 정렬";
+      mobileSortBtn.appendChild(arrowImg.cloneNode());
+    }
+    if (mobileDateBtn) mobileDateBtn.innerText = "날짜순 정렬";
   } else {
-    if (sortBtn) sortBtn.textContent = "우선순위 정렬";
-    if (dateSortBtn) dateSortBtn.textContent = "날짜순 정렬" + arrow;
-    if (mobileSortBtn) mobileSortBtn.textContent = "우선순위 정렬";
-    if (mobileDateBtn) mobileDateBtn.textContent = "날짜순 정렬" + arrow;
+    if (sortBtn) sortBtn.innerText = "우선순위 정렬";
+    if (dateSortBtn) {
+      dateSortBtn.innerText = "날짜순 정렬";
+      dateSortBtn.appendChild(arrowImg.cloneNode());
+    }
+    if (mobileSortBtn) mobileSortBtn.innerText = "우선순위 정렬";
+    if (mobileDateBtn) {
+      mobileDateBtn.innerText = "날짜순 정렬";
+      mobileDateBtn.appendChild(arrowImg.cloneNode());
+    }
   }
 }
