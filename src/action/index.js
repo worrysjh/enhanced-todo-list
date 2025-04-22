@@ -70,14 +70,21 @@ document.addEventListener("DOMContentLoaded", () => {
   if (dateSortBtn) dateSortBtn.onclick = toggleDateSort;
   if (filterSelect) filterSelect.onchange = (e) => setFilter(e.target.value);
 
+  const savedTheme = localStorage.getItem("theme");
+  if(savedTheme === "dark"){
+    document.body.classList.add("dark-mode");
+    themeToggleBtn.innerText = "☀️ 라이트모드로 전환";
+  } else{
+    themeToggleBtn.innerText = "🌙 다크모드로 전환";
+  }
+
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
-      if (document.body.classList.contains("dark-mode")) {
-        themeToggleBtn.innerText = "☀️ 라이트모드로 전환";
-      } else {
-        themeToggleBtn.innerText = "🌙 다크모드로 전환";
-      }
+      const isDark = document.body.classList.contains("dark-mode");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+
+      themeToggleBtn.innerText = isDark ? "☀️ 라이트모드로 전환" : "🌙 다크모드로 전환";
     });
   }
 

@@ -61,8 +61,7 @@ window.onload = function () {
 
     // 변경된 목록을 localStorage에 저장
     saveTodos(todos);
-
-
+    
     
     try {
       if (window.opener && window.opener.location) {
@@ -72,6 +71,6 @@ window.onload = function () {
       console.warn("opener 접근 실패", e);
     }
 
-    window.close();
+    window.close();  
   };
 };
