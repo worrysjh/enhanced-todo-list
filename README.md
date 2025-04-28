@@ -42,7 +42,7 @@ HTML5, CSS3, JavaScript의 기초부터 시맨틱 마크업과 반응형 디자�
 
 ```
 📁 src/
-├── action/            # JS 모듈 (UI, 이벤트, 저장소 로직)
+├── js/            # JS 모듈 (UI, 이벤트, 저장소 로직)
 │   ├── index.js
 │   ├── ui.js
 │   ├── events.js
@@ -77,7 +77,7 @@ index.html              # 메인 화면
 ---
 
 
-## 📦 모듈 설명 (`src/action/`)
+## 📦 모듈 설명 (`src/js/`)
 
 이 프로젝트는 주요 기능을 목적에 따라 다음과 같은 JavaScript 모듈로 분리하여 구성되어 있습니다.
 
