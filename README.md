@@ -69,9 +69,10 @@ index.html              # 메인 화면
 ---
 
 
-## 👨‍💻 차트
+## 👨‍💻 흐름도
 
--- WorkFlow
+![todolist 흐름도](https://github.com/user-attachments/assets/b03fe080-ba45-4fb9-898c-844bae2bd817)
+
 
 ---
 
