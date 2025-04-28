@@ -226,3 +226,9 @@ footer {
   color: #777;
   background-color: #f9f9f9;
 }
+
+.sort-icon {
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+}

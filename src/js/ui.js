@@ -183,11 +183,12 @@ function updateSortIndicators() {
   const dateSortBtn = document.getElementById("dateSortBtn");
 
   const arrowImg = document.createElement("img");
+  arrowImg.className = "sort-icon";
   arrowImg.src = sortDescending
     ? "src/common/icons/downArrow.png"
     : "src/common/icons/upArrow.png";
   arrowImg.alt = sortDescending ? "내림차순" : "오름차순";
-  arrowImg.className = "sort-icon";
+  
 
   const mobileSortBtn = document.querySelector(
     "#mobileToolbar button:nth-child(2)"

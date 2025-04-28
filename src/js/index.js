@@ -73,9 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("theme");
   if(savedTheme === "dark"){
     document.body.classList.add("dark-mode");
-    themeToggleBtn.innerText = "☀️ 라이트모드로 전환";
+    themeToggleBtn.innerText = "☀️";
   } else{
-    themeToggleBtn.innerText = "🌙 다크모드로 전환";
+    themeToggleBtn.innerText = "🌙";
   }
 
   if (themeToggleBtn) {
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const isDark = document.body.classList.contains("dark-mode");
       localStorage.setItem("theme", isDark ? "dark" : "light");
 
-      themeToggleBtn.innerText = isDark ? "☀️ 라이트모드로 전환" : "🌙 다크모드로 전환";
+      themeToggleBtn.innerText = isDark ? "☀️" : "🌙";
     });
   }
 

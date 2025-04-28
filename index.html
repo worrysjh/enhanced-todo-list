@@ -7,15 +7,15 @@
   <link rel="stylesheet" href="src/styles/style.css" />
   <link rel="stylesheet" href="src/styles/popup.css" />
   <link rel="stylesheet" href="src/styles/mediaquery.css" />
-  <script type="module" src="src/action/index.js" defer></script>
+  <script type="module" src="src/js/index.js" defer></script>
 </head>
 
 <body>
   <header>
     <h1>나만의 할 일 목록</h1>
     <div>
-      <button id="themeToggleBtn" class="theme-toggle">🌙 다크모드로 전환</button>
-      <button class="hamburger" onclick="import('./src/action/ui.js').then(m => m.toggleMobileToolbar())">☰</button>
+      <button id="themeToggleBtn" class="theme-toggle">🌙</button>
+      <button class="hamburger" onclick="import('./src/js/ui.js').then(m => m.toggleMobileToolbar())">☰</button>
     </div>
   </header>
 
@@ -34,7 +34,7 @@
         <option value="완료">완료</option>
       </select>
 
-      <button class="danger-button" onclick="import('./src/action/ui.js').then(m => m.deleteSelectedTodos())">
+      <button class="danger-button" onclick="import('./src/js/ui.js').then(m => m.deleteSelectedTodos())">
         선택 항목 삭제
       </button>
     </aside>
